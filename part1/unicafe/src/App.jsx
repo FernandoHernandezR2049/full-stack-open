@@ -6,6 +6,13 @@ import "./App.css";
 const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
+const StatisticLine = ({ text, value }) => {
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
+};
 const Statistics = ({ count }) => {
   function getAverage(good, neutral, bad) {
     return (good * 1 + bad * -1) / (good + neutral + bad);
@@ -17,15 +24,21 @@ const Statistics = ({ count }) => {
   if (count.good + count.neutral + count.bad !== 0) {
     statisticsContent = (
       <>
-        <p>good {count.good}</p>
-        <p>neutral {count.neutral}</p>
-        <p>bad {count.bad}</p>
-        <p>all {count.good + count.neutral + count.bad}</p>
-        <p>average {getAverage(count.good, count.neutral, count.bad)}</p>
-        <p>
-          positive {getPositivePercentage(count.good, count.neutral, count.bad)}
-          %
-        </p>
+        <StatisticLine text="good" value={count.good} />
+        <StatisticLine text="neutral" value={count.neutral} />
+        <StatisticLine text="bad" value={count.bad} />
+        <StatisticLine
+          text="all"
+          value={count.good + count.neutral + count.bad}
+        />
+        <StatisticLine
+          text="average"
+          value={getAverage(count.good, count.neutral, count.bad)}
+        />
+        <StatisticLine
+          text="positive"
+          value={getPositivePercentage(count.good, count.neutral, count.bad)}
+        />
       </>
     );
   }
