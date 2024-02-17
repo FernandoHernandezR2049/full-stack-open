@@ -3,6 +3,9 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
+const Button = ({ handleClick, text }) => {
+  return <button onClick={handleClick}>{text}</button>;
+};
 const Statistics = ({ count }) => {
   function getAverage(good, neutral, bad) {
     return (good * 1 + bad * -1) / (good + neutral + bad);
@@ -60,9 +63,9 @@ function App() {
   return (
     <>
       <h2>Give feedback</h2>
-      <button onClick={increaseGood}>good</button>
-      <button onClick={increaseNeutral}>neutral</button>
-      <button onClick={increaseBad}>bad</button>
+      <Button handleClick={increaseGood} text={"positive"} />
+      <Button handleClick={increaseNeutral} text={"neutral"} />
+      <Button handleClick={increaseBad} text={"bad"} />
       <Statistics count={count} />
     </>
   );
