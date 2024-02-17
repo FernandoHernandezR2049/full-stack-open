@@ -10,17 +10,26 @@ const Statistics = ({ count }) => {
   function getPositivePercentage(good, neutral, bad) {
     return good / (good + bad + neutral);
   }
+  let statisticsContent = <p>No feedback given</p>;
+  if (count.good + count.neutral + count.bad !== 0) {
+    statisticsContent = (
+      <>
+        <p>good {count.good}</p>
+        <p>neutral {count.neutral}</p>
+        <p>bad {count.bad}</p>
+        <p>all {count.good + count.neutral + count.bad}</p>
+        <p>average {getAverage(count.good, count.neutral, count.bad)}</p>
+        <p>
+          positive {getPositivePercentage(count.good, count.neutral, count.bad)}
+          %
+        </p>
+      </>
+    );
+  }
   return (
     <>
       <h2>Statistics</h2>
-      <p>good {count.good}</p>
-      <p>neutral {count.neutral}</p>
-      <p>bad {count.bad}</p>
-      <p>all {count.good + count.neutral + count.bad}</p>
-      <p>average {getAverage(count.good, count.neutral, count.bad)}</p>
-      <p>
-        positive {getPositivePercentage(count.good, count.neutral, count.bad)}%
-      </p>
+      {statisticsContent}
     </>
   );
 };
