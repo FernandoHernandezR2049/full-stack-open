@@ -24,12 +24,23 @@ const App = () => {
     updatedVotes[selected] += 1;
     setVotes(updatedVotes);
   };
+
+  const findMaxValue = (arr) => {
+    return arr.reduce(
+      (maxIndex, element, i, arr) => (element > arr[maxIndex] ? i : maxIndex),
+      0
+    );
+  };
+
   return (
     <>
+      <h2>Anecdote of the day</h2>
       <div>{anecdotes[selected]}</div>
       <div>has {votes[selected]} votes</div>
       <button onClick={handleUpvote}>Vote</button>
       <button onClick={handleAnecdoteRefresh}>Next anectode</button>
+      <h2>Anecdote with most votes</h2>
+      <div>{anecdotes[findMaxValue(votes)]}</div>
     </>
   );
 };
