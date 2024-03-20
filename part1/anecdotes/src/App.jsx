@@ -13,8 +13,15 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
-
-  return <div>{anecdotes[selected]}</div>;
+  const handleAnecdoteRefresh = () => {
+    setSelected(Math.floor(Math.random() * 8));
+  };
+  return (
+    <>
+      <div>{anecdotes[selected]}</div>
+      <button onClick={handleAnecdoteRefresh}>Next anectode</button>
+    </>
+  );
 };
 
 export default App;
