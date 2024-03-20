@@ -13,12 +13,22 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Array(8).fill(0));
+
   const handleAnecdoteRefresh = () => {
     setSelected(Math.floor(Math.random() * 8));
+  };
+
+  const handleUpvote = () => {
+    let updatedVotes = [...votes];
+    updatedVotes[selected] += 1;
+    setVotes(updatedVotes);
   };
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <div>has {votes[selected]} votes</div>
+      <button onClick={handleUpvote}>Vote</button>
       <button onClick={handleAnecdoteRefresh}>Next anectode</button>
     </>
   );
