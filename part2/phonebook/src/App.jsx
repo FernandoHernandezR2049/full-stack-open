@@ -1,6 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import Persons from "./Persons";
 import "./App.css";
 
 function App() {
@@ -68,11 +67,7 @@ function App() {
         </div>
       </form>
       <h2>Numbers</h2>
-      {filterPersons(persons).map((person) => (
-        <p key={person.id}>
-          Name:{person.name} Number:{person.number}
-        </p>
-      ))}
+      <Persons persons={filterPersons(persons)} />
     </div>
   );
 }
