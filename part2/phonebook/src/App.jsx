@@ -4,12 +4,19 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [persons, setPersons] = useState([{ id: 1, name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([
+    { id: 1, name: "Arto Hellas", number: "12345" },
+  ]);
   const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
     setNewName(event.target.value);
+  };
+  const handleNumberChange = (event) => {
+    console.log(event.target.value);
+    setNewNumber(event.target.value);
   };
   const addPerson = (event) => {
     event.preventDefault();
@@ -22,9 +29,11 @@ function App() {
     const newPerson = {
       id: persons.length + 1,
       name: newName,
+      number: newNumber,
     };
     setPersons(persons.concat(newPerson));
     setNewName("");
+    setNewNumber("");
   };
   return (
     <div>
@@ -34,12 +43,17 @@ function App() {
           name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
+          number: <input value={newNumber} onChange={handleNumberChange} />
+        </div>
+        <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       {persons.map((person) => (
-        <p key={person.id}>{person.name}</p>
+        <p key={person.id}>
+          Name:{person.name} Number:{person.number}
+        </p>
       ))}
       ...
     </div>
