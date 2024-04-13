@@ -5,10 +5,14 @@ import "./App.css";
 
 function App() {
   const [persons, setPersons] = useState([
-    { id: 1, name: "Arto Hellas", number: "12345" },
+    { name: "Arto Hellas", number: "040-123456", id: 1 },
+    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
+    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
+    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [nameFilter, setNameFilter] = useState("");
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
@@ -17,6 +21,10 @@ function App() {
   const handleNumberChange = (event) => {
     console.log(event.target.value);
     setNewNumber(event.target.value);
+  };
+  const handleNameFilter = (event) => {
+    console.log(event.target.value);
+    setNameFilter(event.target.value);
   };
   const addPerson = (event) => {
     event.preventDefault();
@@ -35,9 +43,19 @@ function App() {
     setNewName("");
     setNewNumber("");
   };
+  function filterPersons(persons) {
+    return persons.filter((person) =>
+      person.name.toLowerCase().includes(nameFilter.toLowerCase())
+    );
+  }
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        filter shown names with:{" "}
+        <input value={nameFilter} onChange={handleNameFilter} />
+      </div>
+      <h2>Add new person</h2>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
@@ -50,12 +68,11 @@ function App() {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((person) => (
+      {filterPersons(persons).map((person) => (
         <p key={person.id}>
           Name:{person.name} Number:{person.number}
         </p>
       ))}
-      ...
     </div>
   );
 }
